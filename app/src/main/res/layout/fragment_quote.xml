@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
+        android:padding="@dimen/base_margin"
         tools:context=".ui.fragments.QuoteFragment">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             app:strokeColor="@color/black"
             app:cardBackgroundColor="@color/medium_gray"
-            android:layout_margin="@dimen/margin_icon"
+            android:layout_margin="@dimen/side_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

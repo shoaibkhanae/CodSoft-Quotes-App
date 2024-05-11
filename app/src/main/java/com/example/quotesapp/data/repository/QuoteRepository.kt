@@ -10,6 +10,7 @@ import com.example.quotesapp.data.db.Quote
 import com.example.quotesapp.data.db.QuoteDao
 import com.example.quotesapp.data.model.QuoteList
 import com.example.quotesapp.data.paging.QuotePagingSource
+import com.example.quotesapp.utils.Response
 
 class QuoteRepository(
     private val service: QuoteApiService,
@@ -18,8 +19,8 @@ class QuoteRepository(
 
     val allQuotes = quoteDao.getAllQuotes()
 
-    private val _searched = MutableLiveData<QuoteList>()
-    val searched: LiveData<QuoteList> = _searched
+    private val _searched = MutableLiveData<Response<QuoteList>>()
+    val searched: LiveData<Response<QuoteList>> = _searched
 
     fun getQuotes() = Pager(
         config = PagingConfig(pageSize = 20, maxSize = 100),
@@ -30,10 +31,10 @@ class QuoteRepository(
         try {
             val result = service.searchQuotes(search)
             if (result.body() != null) {
-                _searched.postValue(result.body())
+                _searched.postValue(Response.Success(result.body()))
             }
         } catch (e: Exception) {
-
+            _searched.postValue(Response.Error(e.message.toString()))
         }
     }
 

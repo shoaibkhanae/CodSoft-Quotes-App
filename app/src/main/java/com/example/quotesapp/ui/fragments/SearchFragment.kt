@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.databinding.FragmentSearchBinding
 import com.example.quotesapp.di.QuoteApplication
 import com.example.quotesapp.ui.adapters.SearchAdapter
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 import com.example.quotesapp.ui.viewmodels.QuoteViewModelFactory
+import com.example.quotesapp.utils.Response
 
 
 class SearchFragment : Fragment() {
@@ -26,7 +29,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater,container, false)
         return binding.root
     }
@@ -45,8 +48,33 @@ class SearchFragment : Fragment() {
         }
 
         shareViewModel.searched.observe(viewLifecycleOwner) {
-            val adapter = SearchAdapter(it.results)
-            binding.recyclerview.adapter = adapter
+            when(it) {
+                is Response.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.recyclerview.visibility = View.VISIBLE
+                    val adapter = it.data?.results?.let { resultList -> SearchAdapter(resultList) }
+                    binding.recyclerview.adapter = adapter
+
+                    adapter?.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            val current = it.data.results[position]
+                            val action = SearchFragmentDirections
+                                .actionSearchFragmentToQuoteFragment(current.content, current.author)
+                            findNavController().navigate(action)
+                        }
+                    })
+                    
+                }
+                is Response.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.recyclerview.visibility = View.GONE
+                    Toast.makeText(requireContext(),it.error.toString(),Toast.LENGTH_LONG).show()
+                }
+                is Response.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.recyclerview.visibility = View.GONE
+                }
+            }
         }
     }
 

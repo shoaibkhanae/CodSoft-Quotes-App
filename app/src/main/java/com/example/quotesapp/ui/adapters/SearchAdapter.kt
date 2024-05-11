@@ -14,6 +14,16 @@ class SearchAdapter(private val dataset: List<Result>) : RecyclerView.Adapter<Se
         var author: TextView = view.findViewById(R.id.tv_author)
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private var onItemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.quotes_item,parent,false)
@@ -26,5 +36,9 @@ class SearchAdapter(private val dataset: List<Result>) : RecyclerView.Adapter<Se
         val current = dataset[position]
         holder.content.text = current.content
         holder.author.text = current.author
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(position)
+        }
     }
 }

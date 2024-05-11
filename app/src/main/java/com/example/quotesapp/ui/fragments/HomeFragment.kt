@@ -68,6 +68,10 @@ class HomeFragment : Fragment() {
         binding?.ideasIcon?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
         }
+
+        binding?.searchIcon?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
     }
 
     override fun onDestroy() {

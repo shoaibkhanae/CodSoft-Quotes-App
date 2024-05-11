@@ -30,8 +30,8 @@ class QuoteFragment : Fragment() {
         QuoteViewModelFactory((requireActivity().application as QuoteApplication).repository)
     }
 
-    private lateinit var content: String
-    private lateinit var author: String
+    lateinit var content: String
+    lateinit var author: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

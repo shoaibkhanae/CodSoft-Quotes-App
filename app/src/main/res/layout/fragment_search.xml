@@ -6,35 +6,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     android:padding="@dimen/base_margin"
-    tools:context=".ui.fragments.FavouriteFragment">
+    tools:context=".ui.fragments.SearchFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/favourite_app_bar"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_arrow_back"
+        android:hint="@string/search"
+        app:hintTextColor="@color/white"
+        app:boxStrokeWidth="2dp"
+        android:layout_marginHorizontal="@dimen/side_margin"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/favorite"
-            android:textAlignment="center"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/white"/>
-    </com.google.android.material.appbar.MaterialToolbar>
+            android:imeOptions="actionSearch"
+            android:textColor="@color/white"
+            android:drawableRight="@drawable/ic_search"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favourite_recyclerview"
+        android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/favourite_app_bar"
+        android:layout_marginTop="@dimen/base_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_search"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

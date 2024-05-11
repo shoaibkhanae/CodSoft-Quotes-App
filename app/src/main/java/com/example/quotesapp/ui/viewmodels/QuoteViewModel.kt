@@ -11,13 +11,18 @@ import kotlinx.coroutines.launch
 
 class QuoteViewModel(private val repository: QuoteRepository) : ViewModel() {
     val quotes = repository.getQuotes().cachedIn(viewModelScope)
-
+    val searched = repository.searched
     val savedQuotes = repository.allQuotes.asLiveData()
-
 
     fun insert(quote: Quote) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insert(quote)
+        }
+    }
+
+    fun searchQuotes(search: String) {
+        viewModelScope.launch {
+            repository.searchQuotes(search)
         }
     }
 

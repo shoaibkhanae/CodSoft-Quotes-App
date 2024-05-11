@@ -6,4 +6,12 @@
     <string name="retry">Retry</string>
     <string name="no_results">No Results</string>
     <string name="favorite">Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="happiness">Happiness</string>
+    <string name="life">Life</string>
+    <string name="success">Success</string>
+    <string name="failure">Failure</string>
+    <string name="experience">Experience</string>
 </resources>

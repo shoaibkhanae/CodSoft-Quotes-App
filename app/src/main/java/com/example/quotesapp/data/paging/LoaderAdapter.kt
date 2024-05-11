@@ -1,4 +1,4 @@
-package com.example.quotesapp.ui.adapter
+package com.example.quotesapp.data.paging
 
 import android.view.LayoutInflater
 import android.view.View

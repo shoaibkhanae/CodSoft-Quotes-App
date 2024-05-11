@@ -1,25 +1,21 @@
-package com.example.quotesapp.ui.adapter
+package com.example.quotesapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotesapp.R
 import com.example.quotesapp.data.db.Quote
-import com.example.quotesapp.ui.viewmodels.QuoteViewModel
-import com.google.android.material.snackbar.Snackbar
 
-class IdeasAdapter(private val viewModel: QuoteViewModel)
+class IdeasAdapter
     : ListAdapter<Quote, IdeasAdapter.IdeasViewHolder>(QuoteDiffCallBack()) {
 
     class IdeasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var content: TextView = view.findViewById(R.id.saved_content)
-        var author: TextView = view.findViewById(R.id.saved_author)
-        var delete: ImageView = view.findViewById(R.id.delete_button)
+        var content: TextView = view.findViewById(R.id.tv_content)
+        var author: TextView = view.findViewById(R.id.tv_author)
 
         fun onBind(quote: Quote) {
             content.text = quote.content
@@ -29,7 +25,7 @@ class IdeasAdapter(private val viewModel: QuoteViewModel)
         companion object {
             fun create(parent: ViewGroup) : IdeasViewHolder {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.saved_quote,parent,false)
+                    .inflate(R.layout.quotes_item,parent,false)
 
                 return IdeasViewHolder(view)
             }
@@ -46,6 +42,16 @@ class IdeasAdapter(private val viewModel: QuoteViewModel)
         }
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private var onItemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdeasViewHolder {
         return IdeasViewHolder.create(parent)
     }
@@ -54,14 +60,8 @@ class IdeasAdapter(private val viewModel: QuoteViewModel)
         val current = getItem(position)
         holder.onBind(current)
 
-        holder.delete.setOnClickListener {
-            viewModel.delete(current)
-
-            Snackbar.make(it,"Quote deleted.", Snackbar.LENGTH_SHORT).apply {
-                setAction("Undo") {
-                    viewModel.insert(current)
-                }
-            }.show()
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(position)
         }
     }
 }

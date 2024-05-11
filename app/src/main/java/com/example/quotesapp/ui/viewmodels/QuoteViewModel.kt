@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.quotesapp.data.db.Quote
 import com.example.quotesapp.data.repository.QuoteRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class QuoteViewModel(private val repository: QuoteRepository) : ViewModel() {
@@ -15,13 +16,13 @@ class QuoteViewModel(private val repository: QuoteRepository) : ViewModel() {
 
 
     fun insert(quote: Quote) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insert(quote)
         }
     }
 
     fun delete(quote: Quote) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.delete(quote)
         }
     }

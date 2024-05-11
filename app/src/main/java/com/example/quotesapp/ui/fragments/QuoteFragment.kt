@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.R
 import com.example.quotesapp.data.db.Quote
 import com.example.quotesapp.databinding.FragmentQuoteBinding
@@ -29,8 +30,8 @@ class QuoteFragment : Fragment() {
         QuoteViewModelFactory((requireActivity().application as QuoteApplication).repository)
     }
 
-    lateinit var content: String
-    lateinit var author: String
+    private lateinit var content: String
+    private lateinit var author: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +46,9 @@ class QuoteFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = DataBindingUtil.inflate(inflater,R.layout.fragment_quote,container,false)
-        val view = binding.root
-        return view
+    ): View {
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quote, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,6 +63,15 @@ class QuoteFragment : Fragment() {
 
         binding.shareButton.setOnClickListener { shareQuote() }
 
+        binding.appBar.setNavigationOnClickListener { navigateBack() }
+
+    }
+
+    private fun copyQuote() {
+        val clipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Quote",content + author)
+        clipboardManager.setPrimaryClip(clip)
+        Toast.makeText(requireContext(),"copied",Toast.LENGTH_SHORT).show()
     }
 
     private fun saveQuote() {
@@ -81,12 +90,10 @@ class QuoteFragment : Fragment() {
         startActivity(shareIntent)
     }
 
-    private fun copyQuote() {
-        val clipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("Quote",content + author)
-        clipboardManager.setPrimaryClip(clip)
-        Toast.makeText(requireContext(),"copied",Toast.LENGTH_SHORT).show()
+    private fun navigateBack() {
+        findNavController().navigate(R.id.action_quoteFragment_to_homeFragment)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

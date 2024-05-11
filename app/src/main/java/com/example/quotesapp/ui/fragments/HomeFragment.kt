@@ -14,7 +14,7 @@ import com.example.quotesapp.R
 import com.example.quotesapp.data.paging.QuotePagingAdapter
 import com.example.quotesapp.databinding.FragmentHomeBinding
 import com.example.quotesapp.di.QuoteApplication
-import com.example.quotesapp.ui.adapter.LoaderAdapter
+import com.example.quotesapp.data.paging.LoaderAdapter
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 import com.example.quotesapp.ui.viewmodels.QuoteViewModelFactory
 
@@ -41,6 +41,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = QuotePagingAdapter()
+
         binding?.recyclerview?.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoaderAdapter{ adapter.retry() },
             footer = LoaderAdapter{ adapter.retry() }
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding?.appBar?.setNavigationOnClickListener {
+        binding?.ideasIcon?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
         }
     }

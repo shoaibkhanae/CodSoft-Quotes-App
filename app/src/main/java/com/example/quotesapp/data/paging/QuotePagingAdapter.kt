@@ -54,12 +54,11 @@ class QuotePagingAdapter:
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
         val current = getItem(position)
         if (current != null) {
-
             holder.onBind(current)
 
             holder.card.setOnClickListener {
                 val action = HomeFragmentDirections
-                    .actionHomeFragmentToQuoteFragment(current.content, current.author)
+                    .actionHomeFragmentToQuoteFragment(current.content,current.author)
                 holder.itemView.findNavController().navigate(action)
             }
         }

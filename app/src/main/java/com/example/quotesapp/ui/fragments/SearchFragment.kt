@@ -10,21 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.databinding.FragmentSearchBinding
-import com.example.quotesapp.di.QuoteApplication
 import com.example.quotesapp.ui.adapters.SearchAdapter
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
-import com.example.quotesapp.ui.viewmodels.QuoteViewModelFactory
 import com.example.quotesapp.utils.Response
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding
         get() = _binding!!
 
-    private val shareViewModel: QuoteViewModel by activityViewModels {
-        QuoteViewModelFactory((requireActivity().application as QuoteApplication).repository)
-    }
+    private val shareViewModel: QuoteViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

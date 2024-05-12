@@ -11,30 +11,27 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotesapp.R
 import com.example.quotesapp.databinding.FragmentFavouriteBinding
-import com.example.quotesapp.di.QuoteApplication
 import com.example.quotesapp.ui.adapters.IdeasAdapter
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
-import com.example.quotesapp.ui.viewmodels.QuoteViewModelFactory
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class FavouriteFragment : Fragment() {
     private var _binding: FragmentFavouriteBinding? = null
     private val binding
         get() = _binding!!
 
-    private val shareViewModel: QuoteViewModel by activityViewModels {
-        QuoteViewModelFactory((requireActivity().application as QuoteApplication).repository)
-    }
+    private val shareViewModel: QuoteViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFavouriteBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+    ): View {
+        _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
 }
 
@@ -45,6 +46,7 @@ dependencies {
     val lifecycle_version = "2.7.0"
     val room_version = "2.6.1"
     val paging_version = "3.2.1"
+    val hilt_version = "2.48"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -72,6 +74,10 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     // Paging 3 library
     implementation("androidx.paging:paging-runtime-ktx:$paging_version")
+    // Hilt
+    // Hilt DI
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

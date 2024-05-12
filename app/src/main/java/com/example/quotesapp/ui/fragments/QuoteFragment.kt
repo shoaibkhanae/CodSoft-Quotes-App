@@ -16,19 +16,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.R
 import com.example.quotesapp.data.db.Quote
 import com.example.quotesapp.databinding.FragmentQuoteBinding
-import com.example.quotesapp.di.QuoteApplication
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
-import com.example.quotesapp.ui.viewmodels.QuoteViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class QuoteFragment : Fragment() {
     private var _binding: FragmentQuoteBinding? = null
     private val binding
         get() = _binding!!
 
-    private val shareViewModel: QuoteViewModel by activityViewModels {
-        QuoteViewModelFactory((requireActivity().application as QuoteApplication).repository)
-    }
+    private val shareViewModel: QuoteViewModel by activityViewModels()
 
     lateinit var content: String
     lateinit var author: String

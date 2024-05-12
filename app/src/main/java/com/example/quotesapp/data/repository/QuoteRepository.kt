@@ -11,8 +11,9 @@ import com.example.quotesapp.data.db.QuoteDao
 import com.example.quotesapp.data.model.QuoteList
 import com.example.quotesapp.data.paging.QuotePagingSource
 import com.example.quotesapp.utils.Response
+import javax.inject.Inject
 
-class QuoteRepository(
+class QuoteRepository @Inject constructor(
     private val service: QuoteApiService,
     private val quoteDao: QuoteDao
 ) {
@@ -29,6 +30,7 @@ class QuoteRepository(
 
     suspend fun searchQuotes(search: String) {
         try {
+            _searched.postValue(Response.Loading())
             val result = service.searchQuotes(search)
             if (result.body() != null) {
                 _searched.postValue(Response.Success(result.body()))

@@ -9,10 +9,13 @@ import com.example.quotesapp.data.db.Quote
 import com.example.quotesapp.data.model.QuoteList
 import com.example.quotesapp.data.repository.QuoteRepository
 import com.example.quotesapp.utils.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class QuoteViewModel(private val repository: QuoteRepository) : ViewModel() {
+@HiltViewModel
+class QuoteViewModel @Inject constructor(private val repository: QuoteRepository) : ViewModel() {
     val quotes = repository.getQuotes().cachedIn(viewModelScope)
     val searched: LiveData<Response<QuoteList>> = repository.searched
     val savedQuotes = repository.allQuotes.asLiveData()

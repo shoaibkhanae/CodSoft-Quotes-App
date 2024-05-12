@@ -11,22 +11,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.quotesapp.R
+import com.example.quotesapp.data.paging.LoaderAdapter
 import com.example.quotesapp.data.paging.QuotePagingAdapter
 import com.example.quotesapp.databinding.FragmentHomeBinding
-import com.example.quotesapp.di.QuoteApplication
-import com.example.quotesapp.data.paging.LoaderAdapter
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
-import com.example.quotesapp.ui.viewmodels.QuoteViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding
         get() = _binding
 
-
-    private val shareViewModel: QuoteViewModel by activityViewModels {
-        QuoteViewModelFactory((requireActivity().application as QuoteApplication).repository)
-    }
+    private val shareViewModel: QuoteViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

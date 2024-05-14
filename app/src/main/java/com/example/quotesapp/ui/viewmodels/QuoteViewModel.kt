@@ -16,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuoteViewModel @Inject constructor(private val repository: QuoteRepository) : ViewModel() {
+
     val quotes = repository.getQuotes().cachedIn(viewModelScope)
     val searched: LiveData<Response<QuoteList>> = repository.searched
     val savedQuotes = repository.allQuotes.asLiveData()

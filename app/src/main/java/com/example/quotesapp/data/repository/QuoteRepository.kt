@@ -28,18 +28,29 @@ class QuoteRepository @Inject constructor(
 
     @OptIn(ExperimentalPagingApi::class)
     fun getQuotes() = Pager(
-        config = PagingConfig(pageSize = 20, maxSize = 100),
-        pagingSourceFactory = { database.getQuotesDao().getQuotes() },
-        remoteMediator = QuoteRemoteMediator(service, database)
+        config = PagingConfig(
+            pageSize = 20,
+            maxSize = 100
+        ),
+        pagingSourceFactory = {
+            database.getQuotesDao().getQuotes()
+        },
+        remoteMediator = QuoteRemoteMediator(
+            service,
+            database
+        )
     ).liveData
 
     suspend fun searchQuotes(search: String) {
         try {
             _searched.postValue(Response.Loading())
+
             val result = service.searchQuotes(search)
+
             if (result.body() != null) {
                 _searched.postValue(Response.Success(result.body()))
             }
+
         } catch (e: Exception) {
             _searched.postValue(Response.Error(e.message.toString()))
         }

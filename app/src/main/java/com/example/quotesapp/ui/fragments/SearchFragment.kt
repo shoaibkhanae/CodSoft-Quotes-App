@@ -36,7 +36,11 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        searchQuotes()
+        setupUI()
+    }
 
+    private fun searchQuotes() {
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = binding.etSearch.text.toString()
@@ -45,7 +49,9 @@ class SearchFragment : Fragment() {
             }
             return@setOnEditorActionListener true
         }
+    }
 
+    private fun setupUI() {
         shareViewModel.searched.observe(viewLifecycleOwner) {
             when(it) {
                 is Response.Success -> {
@@ -54,6 +60,7 @@ class SearchFragment : Fragment() {
                     val adapter = it.data?.results?.let { resultList -> SearchAdapter(resultList) }
                     binding.recyclerview.adapter = adapter
 
+                    // for item click
                     adapter?.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
                             val current = it.data.results[position]
@@ -62,7 +69,7 @@ class SearchFragment : Fragment() {
                             findNavController().navigate(action)
                         }
                     })
-                    
+
                 }
                 is Response.Error -> {
                     binding.progressBar.visibility = View.GONE

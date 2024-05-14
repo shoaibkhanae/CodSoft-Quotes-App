@@ -37,9 +37,15 @@ class FavouriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupUI()
+        binding.favouriteAppBar.setNavigationOnClickListener { navigateBack() }
+    }
+
+    private fun setupUI() {
         val adapter = IdeasAdapter()
         binding.favouriteRecyclerview.adapter = adapter
 
+        // Handling item click
         adapter.setOnItemClickListener(object : IdeasAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val current = adapter.currentList[position]
@@ -48,9 +54,9 @@ class FavouriteFragment : Fragment() {
                     .actionFavouriteFragmentToQuoteFragment(current.content, current.author)
                 findNavController().navigate(action)
             }
-
         })
 
+        // For swipe to delete feature
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -68,26 +74,28 @@ class FavouriteFragment : Fragment() {
                 val quote = adapter.currentList[position]
                 shareViewModel.delete(quote)
 
-                Snackbar.make(view,"Successfully deleted quote", Snackbar.LENGTH_LONG).apply {
-                    setAction("undo"){
-                        shareViewModel.insert(quote)
+                view?.let {
+                    Snackbar.make(it,"Successfully deleted quote", Snackbar.LENGTH_LONG).apply {
+                        setAction("undo"){
+                            shareViewModel.insert(quote)
+                        }
+                        show()
                     }
-                    show()
                 }
             }
         }
-
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(binding.favouriteRecyclerview)
         }
 
+
         shareViewModel.savedQuotes.observe(viewLifecycleOwner) { savedQuotes ->
             adapter.submitList(savedQuotes)
         }
+    }
 
-        binding.favouriteAppBar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.action_favouriteFragment_to_homeFragment)
-        }
+    private fun navigateBack() {
+        findNavController().navigate(R.id.action_favouriteFragment_to_homeFragment)
     }
 
     override fun onDestroy() {

@@ -37,38 +37,55 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupUI()
+        binding?.apply {
+            ideasIcon.setOnClickListener { goToFavoriteScreen() }
+            searchIcon.setOnClickListener { goToSearchScreen() }
+        }
+    }
+
+    private fun setupUI() {
         val adapter = QuotePagingAdapter()
 
+        /**
+         * Handling header and footer loading
+         * with retry button
+         */
         binding?.recyclerview?.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoaderAdapter{ adapter.retry() },
             footer = LoaderAdapter{ adapter.retry() }
         )
 
-        binding?.btnRetry?.setOnClickListener { adapter.retry() }
-
-        // Handling the loading states with paging
+        /**
+         * Handling loading states
+         * when to show progress bar
+         * when to show retry button
+         * when to show error
+         */
         adapter.addLoadStateListener { loadState ->
-            binding?.progressCircularBar?.isVisible = loadState.refresh is LoadState.Loading
-            binding?.btnRetry?.isVisible = loadState.refresh is LoadState.Error
+            binding?.apply {
+                progressCircularBar.isVisible = loadState.refresh is LoadState.Loading
+                btnRetry.isVisible = loadState.refresh is LoadState.Error
+            }
 
-            val errorState = loadState.append as? LoadState.Error
-                ?: loadState.prepend as? LoadState.Error
-                ?: loadState.refresh as? LoadState.Error
+            // To show toast for error
+            val errorState = loadState.refresh as? LoadState.Error
             errorState?.let { Toast.makeText(requireContext(),"${it.error}",Toast.LENGTH_LONG).show() }
         }
+        binding?.btnRetry?.setOnClickListener { adapter.retry() }
+
 
         shareViewModel.quotes.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle,it)
         }
+    }
 
+    private fun goToFavoriteScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
+    }
 
-        binding?.ideasIcon?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
-        }
-
-        binding?.searchIcon?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-        }
+    private fun goToSearchScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
     }
 
     override fun onDestroy() {

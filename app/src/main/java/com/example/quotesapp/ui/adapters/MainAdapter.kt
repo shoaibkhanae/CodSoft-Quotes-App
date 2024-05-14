@@ -8,37 +8,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotesapp.R
-import com.example.quotesapp.data.model.Quote
+import com.example.quotesapp.data.model.Result
 
-
-class IdeasAdapter
-    : ListAdapter<Quote, IdeasAdapter.IdeasViewHolder>(QuoteDiffCallBack()) {
-
-    class IdeasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class MainAdapter : ListAdapter<Result,MainAdapter.MainViewHolder>(QuoteDiffCallBack()) {
+    class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var content: TextView = view.findViewById(R.id.tv_content)
         var author: TextView = view.findViewById(R.id.tv_author)
 
-        fun onBind(quote: Quote) {
+        fun onBind(quote: Result) {
             content.text = quote.content
             author.text = quote.author
         }
 
         companion object {
-            fun create(parent: ViewGroup) : IdeasViewHolder {
+            fun create(parent: ViewGroup) : MainViewHolder {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.quotes_item,parent,false)
 
-                return IdeasViewHolder(view)
+                return MainViewHolder(view)
             }
         }
     }
 
-    class QuoteDiffCallBack : DiffUtil.ItemCallback<Quote>() {
-        override fun areItemsTheSame(oldItem: Quote, newItem: Quote): Boolean {
+    class QuoteDiffCallBack : DiffUtil.ItemCallback<Result>() {
+        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Quote, newItem: Quote): Boolean {
+        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem.content == newItem.content
         }
     }
@@ -53,11 +50,11 @@ class IdeasAdapter
         this.onItemClickListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdeasViewHolder {
-        return IdeasViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+        return MainViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: IdeasViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val current = getItem(position)
         holder.onBind(current)
 

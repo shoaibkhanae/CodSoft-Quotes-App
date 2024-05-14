@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.quotesapp.data.model.Quote
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,6 +18,6 @@ interface QuoteDao {
     suspend fun delete(quote: Quote)
 
 
-    @Query("SELECT * FROM quotes")
+    @Query("SELECT * FROM saved")
     fun getAllQuotes(): Flow<List<Quote>>
 }

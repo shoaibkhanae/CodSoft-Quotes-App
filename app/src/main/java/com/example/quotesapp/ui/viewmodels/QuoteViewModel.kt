@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.example.quotesapp.data.db.Quote
+import com.example.quotesapp.data.model.Quote
 import com.example.quotesapp.data.model.QuoteList
 import com.example.quotesapp.data.repository.QuoteRepository
 import com.example.quotesapp.utils.Response

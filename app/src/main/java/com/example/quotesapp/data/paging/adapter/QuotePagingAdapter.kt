@@ -1,4 +1,4 @@
-package com.example.quotesapp.data.paging
+package com.example.quotesapp.data.paging.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,7 @@ import com.example.quotesapp.ui.fragments.HomeFragmentDirections
 import com.google.android.material.card.MaterialCardView
 
 class QuotePagingAdapter:
-    PagingDataAdapter<Result,QuotePagingAdapter.QuoteViewHolder>(ItemComparator()) {
+    PagingDataAdapter<Result, QuotePagingAdapter.QuoteViewHolder>(ItemComparator()) {
 
     class QuoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var content: TextView = view.findViewById(R.id.tv_content)

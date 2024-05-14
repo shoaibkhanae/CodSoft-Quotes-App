@@ -2,19 +2,22 @@ package com.example.quotesapp.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.example.quotesapp.data.api.QuoteApiService
-import com.example.quotesapp.data.db.Quote
 import com.example.quotesapp.data.db.QuoteDao
+import com.example.quotesapp.data.db.QuoteDatabase
+import com.example.quotesapp.data.model.Quote
 import com.example.quotesapp.data.model.QuoteList
-import com.example.quotesapp.data.paging.QuotePagingSource
+import com.example.quotesapp.data.paging.remotemediator.QuoteRemoteMediator
 import com.example.quotesapp.utils.Response
 import javax.inject.Inject
 
 class QuoteRepository @Inject constructor(
     private val service: QuoteApiService,
+    private val database: QuoteDatabase,
     private val quoteDao: QuoteDao
 ) {
 
@@ -23,9 +26,11 @@ class QuoteRepository @Inject constructor(
     private val _searched = MutableLiveData<Response<QuoteList>>()
     val searched: LiveData<Response<QuoteList>> = _searched
 
+    @OptIn(ExperimentalPagingApi::class)
     fun getQuotes() = Pager(
         config = PagingConfig(pageSize = 20, maxSize = 100),
-        pagingSourceFactory = { QuotePagingSource(service) }
+        pagingSourceFactory = { database.getQuotesDao().getQuotes() },
+        remoteMediator = QuoteRemoteMediator(service, database)
     ).liveData
 
     suspend fun searchQuotes(search: String) {

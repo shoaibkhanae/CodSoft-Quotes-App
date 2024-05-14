@@ -11,8 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.quotesapp.R
-import com.example.quotesapp.data.paging.LoaderAdapter
-import com.example.quotesapp.data.paging.QuotePagingAdapter
+import com.example.quotesapp.data.paging.adapter.LoaderAdapter
+import com.example.quotesapp.data.paging.adapter.QuotePagingAdapter
 import com.example.quotesapp.databinding.FragmentHomeBinding
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 import dagger.hilt.android.AndroidEntryPoint

@@ -3,7 +3,7 @@ package com.example.quotesapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.quotesapp.data.api.QuoteApiService
-import com.example.quotesapp.data.db.QuoteDao
+import com.example.quotesapp.data.db.dao.QuoteDao
 import com.example.quotesapp.data.db.QuoteDatabase
 import dagger.Module
 import dagger.Provides

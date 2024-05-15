@@ -1,4 +1,4 @@
-package com.example.quotesapp.data.db
+package com.example.quotesapp.data.db.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.R
-import com.example.quotesapp.data.model.Quote
+import com.example.quotesapp.data.model.entities.Quote
 import com.example.quotesapp.databinding.FragmentQuoteBinding
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 import dagger.hilt.android.AndroidEntryPoint

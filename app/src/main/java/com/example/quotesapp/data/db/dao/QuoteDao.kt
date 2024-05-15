@@ -1,11 +1,11 @@
-package com.example.quotesapp.data.db
+package com.example.quotesapp.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.quotesapp.data.model.Quote
+import com.example.quotesapp.data.model.entities.Quote
 import kotlinx.coroutines.flow.Flow
 
 @Dao

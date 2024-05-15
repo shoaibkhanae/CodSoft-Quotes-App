@@ -7,7 +7,7 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.quotesapp.data.api.QuoteApiService
 import com.example.quotesapp.data.db.QuoteDatabase
-import com.example.quotesapp.data.model.RemoteKeys
+import com.example.quotesapp.data.model.entities.RemoteKeys
 import com.example.quotesapp.data.model.Result
 import retrofit2.HttpException
 import java.io.IOException

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotesapp.R
-import com.example.quotesapp.data.model.Quote
+import com.example.quotesapp.data.model.entities.Quote
 
 
 class IdeasAdapter

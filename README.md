@@ -10,10 +10,10 @@ It is Quotes App, I used Retrofit, Room, Coroutine, Paging 3, MVVM Architecture,
 * Live data
 * View Binding
 * Clean Architecture + MVVM
-* Manual Dependency Injection
+* Hilt DI
 * Room
 * Retrofit
-* Paging 3
+* Paging 3 
 * Material 3
 
 

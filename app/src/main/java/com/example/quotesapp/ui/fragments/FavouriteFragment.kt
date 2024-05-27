@@ -38,8 +38,16 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupUI()
-        binding.favouriteAppBar.setNavigationOnClickListener { navigateBack() }
+        binding.apply {
+            favouriteAppBar.setNavigationOnClickListener { navigateBack() }
+            btnCreate.setOnClickListener { goToCreateScreen() }
+        }
     }
+
+    private fun goToCreateScreen() {
+        findNavController().navigate(R.id.action_favouriteFragment_to_createFragment)
+    }
+
 
     private fun setupUI() {
         val adapter = IdeasAdapter()

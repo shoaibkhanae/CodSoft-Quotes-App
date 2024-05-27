@@ -3,6 +3,5 @@
     <dimen name="side_margin">16dp</dimen>
     <dimen name="base_margin">8dp</dimen>
     <dimen name="margin_icon">24dp</dimen>
-    <dimen name="card_width"></dimen>
-    <dimen name="card_height"></dimen>
+    <dimen name="button_margin">36dp</dimen>
 </resources>

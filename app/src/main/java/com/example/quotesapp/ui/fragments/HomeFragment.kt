@@ -56,24 +56,15 @@ class HomeFragment : Fragment() {
             footer = LoaderAdapter{ adapter.retry() }
         )
 
-        /**
-         * Handling loading states
-         * when to show progress bar
-         * when to show retry button
-         * when to show error
-         */
         adapter.addLoadStateListener { loadState ->
-            binding?.apply {
-                progressCircularBar.isVisible = loadState.refresh is LoadState.Loading
-                btnRetry.isVisible = loadState.refresh is LoadState.Error
-            }
+            binding?.progressCircularBar?.isVisible = loadState.refresh is LoadState.Loading
+            binding?.btnRetry?.isVisible = loadState.refresh is LoadState.Error
 
-            // To show toast for error
-            val errorState = loadState.refresh as? LoadState.Error
-            errorState?.let { Toast.makeText(requireContext(),"${it.error}",Toast.LENGTH_LONG).show() }
+            val errorState = loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+                ?: loadState.refresh as? LoadState.Error
+            errorState?.let { Toast.makeText(requireContext(),"${it.error}", Toast.LENGTH_LONG).show() }
         }
-        binding?.btnRetry?.setOnClickListener { adapter.retry() }
-
 
         shareViewModel.quotes.observe(viewLifecycleOwner) {
             adapter.submitData(lifecycle,it)

@@ -50,6 +50,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_favouriteFragment_to_createFragment"
+            app:destination="@id/createFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -59,5 +62,14 @@
         <action
             android:id="@+id/action_searchFragment_to_quoteFragment"
             app:destination="@id/quoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createFragment"
+        android:name="com.example.quotesapp.ui.fragments.CreateFragment"
+        android:label="fragment_create"
+        tools:layout="@layout/fragment_create" >
+        <action
+            android:id="@+id/action_createFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
     </fragment>
 </navigation>

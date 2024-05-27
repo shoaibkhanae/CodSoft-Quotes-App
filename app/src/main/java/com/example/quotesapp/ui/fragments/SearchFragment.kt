@@ -57,7 +57,8 @@ class SearchFragment : Fragment() {
                 is Response.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.recyclerview.visibility = View.VISIBLE
-                    val adapter = it.data?.results?.let { resultList -> SearchAdapter(resultList) }
+
+                    val adapter = it.data?.results?.let { list -> SearchAdapter(list) }
                     binding.recyclerview.adapter = adapter
 
                     // for item click

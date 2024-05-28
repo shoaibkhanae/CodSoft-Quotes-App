@@ -8,44 +8,14 @@
     android:padding="@dimen/base_margin"
     tools:context=".ui.fragments.FavouriteFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/favourite_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/favorite"
-            android:textAlignment="center"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/white"/>
-    </com.google.android.material.appbar.MaterialToolbar>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favourite_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/favourite_app_bar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_icon"
-        android:backgroundTint="@color/medium_gray"
-        android:src="@drawable/create_icon"
-        android:layout_marginBottom="@dimen/button_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

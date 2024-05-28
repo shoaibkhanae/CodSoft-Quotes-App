@@ -7,55 +7,13 @@
     android:background="@color/black"
     tools:context=".ui.fragments.CreateFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/base_margin">
-
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/create"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <ImageView
-                android:id="@+id/btn_created"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/done_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.MaterialToolbar>
-
     <EditText
         android:id="@+id/et_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/app_bar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/author"

@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.R
 import com.example.quotesapp.data.model.entities.Quote
 import com.example.quotesapp.databinding.FragmentQuoteBinding
@@ -61,8 +60,6 @@ class QuoteFragment : Fragment() {
 
         binding.shareButton.setOnClickListener { shareQuote() }
 
-        binding.appBar.setNavigationOnClickListener { navigateBack() }
-
     }
 
     private fun copyQuote() {
@@ -87,11 +84,6 @@ class QuoteFragment : Fragment() {
         val shareIntent = Intent.createChooser(sendIntent,null)
         startActivity(shareIntent)
     }
-
-    private fun navigateBack() {
-        findNavController().navigate(R.id.action_quoteFragment_to_homeFragment)
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.example.quotesapp.R
 import com.example.quotesapp.data.paging.adapter.LoaderAdapter
 import com.example.quotesapp.data.paging.adapter.QuotePagingAdapter
 import com.example.quotesapp.databinding.FragmentHomeBinding
@@ -38,10 +36,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupUI()
-        binding?.apply {
-            ideasIcon.setOnClickListener { goToFavoriteScreen() }
-            searchIcon.setOnClickListener { goToSearchScreen() }
-        }
     }
 
     private fun setupUI() {
@@ -71,13 +65,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun goToFavoriteScreen() {
-        findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
-    }
-
-    private fun goToSearchScreen() {
-        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-    }
 
     override fun onDestroy() {
         super.onDestroy()

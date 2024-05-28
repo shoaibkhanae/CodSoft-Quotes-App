@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.QuotesApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/black</item>
+    <!-- Base application theme. -->
+    <style name="Theme.FoodOrdering" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/medium_gray</item>
+        <item name="colorSecondaryVariant">@color/medium_gray</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!---status bar.-->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
-
-    <style name="Theme.QuotesApp" parent="Base.Theme.QuotesApp" />
 </resources>

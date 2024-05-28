@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.quotesapp.R
 import com.example.quotesapp.databinding.FragmentFavouriteBinding
 import com.example.quotesapp.ui.adapters.IdeasAdapter
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
@@ -36,18 +35,8 @@ class FavouriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupUI()
-        binding.apply {
-            favouriteAppBar.setNavigationOnClickListener { navigateBack() }
-            btnCreate.setOnClickListener { goToCreateScreen() }
-        }
     }
-
-    private fun goToCreateScreen() {
-        findNavController().navigate(R.id.action_favouriteFragment_to_createFragment)
-    }
-
 
     private fun setupUI() {
         val adapter = IdeasAdapter()
@@ -100,10 +89,6 @@ class FavouriteFragment : Fragment() {
         shareViewModel.savedQuotes.observe(viewLifecycleOwner) { savedQuotes ->
             adapter.submitList(savedQuotes)
         }
-    }
-
-    private fun navigateBack() {
-        findNavController().navigate(R.id.action_favouriteFragment_to_homeFragment)
     }
 
     override fun onDestroy() {

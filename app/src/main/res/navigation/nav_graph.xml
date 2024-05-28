@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_homeFragment_to_quoteFragment"
             app:destination="@id/quoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_ideasFragment"
+            app:destination="@id/ideasFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createFragment"
+            app:destination="@id/createFragment" />
     </fragment>
     <fragment
         android:id="@+id/quoteFragment"
@@ -47,6 +53,11 @@
     <fragment
         android:id="@+id/createFragment"
         android:name="com.example.quotesapp.ui.fragments.CreateFragment"
-        android:label="fragment_create"
+        android:label="Create Quote"
         tools:layout="@layout/fragment_create" />
+    <fragment
+        android:id="@+id/ideasFragment"
+        android:name="com.example.quotesapp.ui.fragments.IdeasFragment"
+        android:label="Your Ideas"
+        tools:layout="@layout/fragment_ideas" />
 </navigation>

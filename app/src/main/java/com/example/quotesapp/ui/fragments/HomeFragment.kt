@@ -2,13 +2,18 @@ package com.example.quotesapp.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.example.quotesapp.R
 import com.example.quotesapp.data.paging.adapter.LoaderAdapter
 import com.example.quotesapp.data.paging.adapter.QuotePagingAdapter
 import com.example.quotesapp.databinding.FragmentHomeBinding
@@ -23,6 +28,11 @@ class HomeFragment : Fragment() {
 
     private val shareViewModel: QuoteViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,9 +44,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupUI()
+        binding?.createButton?.setOnClickListener { goToCreateScreen() }
     }
+
 
     private fun setupUI() {
         val adapter = QuotePagingAdapter()
@@ -65,6 +76,28 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.layout_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.ideas_button -> {
+                goToIdeasScreen()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun goToCreateScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_createFragment)
+    }
+
+    private fun goToIdeasScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_ideasFragment)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

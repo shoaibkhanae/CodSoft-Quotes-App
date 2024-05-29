@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.quotesapp.data.api.QuoteApiService
 import com.example.quotesapp.data.db.dao.QuoteDao
 import com.example.quotesapp.data.db.QuoteDatabase
+import com.example.quotesapp.data.db.dao.AuthorQuotesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,6 +24,10 @@ object AppModule {
         return database.getDao()
     }
 
+    @Provides
+    fun provideAuthorDao(database: QuoteDatabase): AuthorQuotesDao {
+        return database.getAuthorQuotesDao()
+    }
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext app: Context): QuoteDatabase {

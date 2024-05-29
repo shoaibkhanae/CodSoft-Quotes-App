@@ -7,21 +7,22 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.example.quotesapp.data.api.QuoteApiService
-import com.example.quotesapp.data.db.dao.QuoteDao
 import com.example.quotesapp.data.db.QuoteDatabase
-import com.example.quotesapp.data.model.entities.Quote
 import com.example.quotesapp.data.model.QuoteList
+import com.example.quotesapp.data.model.entities.Quote
+import com.example.quotesapp.data.model.entities.Write
 import com.example.quotesapp.data.paging.remotemediator.QuoteRemoteMediator
 import com.example.quotesapp.utils.Response
 import javax.inject.Inject
 
 class QuoteRepository @Inject constructor(
     private val service: QuoteApiService,
-    private val database: QuoteDatabase,
-    private val quoteDao: QuoteDao
+    private val database: QuoteDatabase
 ) {
 
-    val allQuotes = quoteDao.getAllQuotes()
+    val allQuotes = database.getDao().getAllQuotes()
+
+    val allAuthorsQuotes = database.getAuthorQuotesDao().getAllAuthorsQuotes()
 
     private val _searched = MutableLiveData<Response<QuoteList>>()
     val searched: LiveData<Response<QuoteList>> = _searched
@@ -57,10 +58,22 @@ class QuoteRepository @Inject constructor(
     }
 
     suspend fun insert(quote: Quote) {
-        quoteDao.insert(quote)
+        database.getDao().insert(quote)
     }
 
     suspend fun delete(quote: Quote) {
-        quoteDao.delete(quote)
+        database.getDao().delete(quote)
+    }
+
+    suspend fun insert(write: Write) {
+        database.getAuthorQuotesDao().insert(write)
+    }
+
+    suspend fun update(write: Write) {
+        database.getAuthorQuotesDao().update(write)
+    }
+
+    suspend fun delete(write: Write) {
+        database.getAuthorQuotesDao().delete(write)
     }
 }

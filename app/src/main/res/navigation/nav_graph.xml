@@ -54,7 +54,11 @@
         android:id="@+id/createFragment"
         android:name="com.example.quotesapp.ui.fragments.CreateFragment"
         android:label="Create Quote"
-        tools:layout="@layout/fragment_create" />
+        tools:layout="@layout/fragment_create" >
+        <action
+            android:id="@+id/action_createFragment_to_ideasFragment"
+            app:destination="@id/ideasFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/ideasFragment"
         android:name="com.example.quotesapp.ui.fragments.IdeasFragment"

@@ -8,9 +8,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.quotesapp.R
@@ -28,11 +31,6 @@ class HomeFragment : Fragment() {
 
     private val shareViewModel: QuoteViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +42,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleActionBar()
         setupUI()
         binding?.createButton?.setOnClickListener { goToCreateScreen() }
     }
@@ -76,19 +75,32 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.layout_menu,menu)
-    }
+    private fun handleActionBar() {
+        val menuHost: MenuHost = requireActivity()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.ideas_button -> {
-                goToIdeasScreen()
-                return true
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.layout_menu,menu)
             }
-            else -> super.onOptionsItemSelected(item)
-        }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when(menuItem.itemId) {
+                    R.id.ideas_button -> {
+                        goToIdeasScreen()
+                        return true
+                    }
+                    R.id.search_button -> {
+                        goToSearchScreen()
+                        return true
+                    }
+                    R.id.favorite_button -> {
+                        goToFavoriteScreen()
+                        return true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun goToCreateScreen() {
@@ -97,6 +109,14 @@ class HomeFragment : Fragment() {
 
     private fun goToIdeasScreen() {
         findNavController().navigate(R.id.action_homeFragment_to_ideasFragment)
+    }
+
+    private fun goToSearchScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+    }
+
+    private fun goToFavoriteScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
     }
 
     override fun onDestroy() {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotesapp.databinding.FragmentIdeasBinding
@@ -27,7 +28,7 @@ class IdeasFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentIdeasBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -41,8 +42,20 @@ class IdeasFragment : Fragment() {
         val adapter = AuthorsAdapter()
         binding.recyclerview.adapter = adapter
 
+        adapter.setOnItemClickListener(object : AuthorsAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val current = adapter.currentList[position]
 
-        // For swipe to delete feature
+                val action = IdeasFragmentDirections
+                    .actionIdeasFragmentToUpdateFragment(current.id,current.author,current.content)
+                findNavController().navigate(action)
+            }
+        })
+
+
+        /**
+         * For enabling swipe to delete feature in list
+         */
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT

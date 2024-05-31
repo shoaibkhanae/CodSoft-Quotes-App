@@ -42,7 +42,10 @@ class FavouriteFragment : Fragment() {
         val adapter = IdeasAdapter()
         binding.favouriteRecyclerview.adapter = adapter
 
-        // Handling item click
+        /**
+         * For handling the click on item
+         * to go the quote screen
+         */
         adapter.setOnItemClickListener(object : IdeasAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val current = adapter.currentList[position]
@@ -53,7 +56,9 @@ class FavouriteFragment : Fragment() {
             }
         })
 
-        // For swipe to delete feature
+        /**
+         * For enabling swipe to delete feature in list
+         */
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT

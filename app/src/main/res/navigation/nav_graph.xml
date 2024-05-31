@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_homeFragment_to_createFragment"
             app:destination="@id/createFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/quoteFragment"
@@ -63,5 +69,29 @@
         android:id="@+id/ideasFragment"
         android:name="com.example.quotesapp.ui.fragments.IdeasFragment"
         android:label="Your Ideas"
-        tools:layout="@layout/fragment_ideas" />
+        tools:layout="@layout/fragment_ideas" >
+        <action
+            android:id="@+id/action_ideasFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.quotesapp.ui.fragments.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_ideasFragment"
+            app:destination="@id/ideasFragment"
+            app:popUpTo="@id/ideasFragment"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="author"
+            app:argType="string" />
+        <argument
+            android:name="content"
+            app:argType="string" />
+    </fragment>
 </navigation>

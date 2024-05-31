@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/black"
+    tools:context=".ui.fragments.UpdateFragment"
     android:padding="@dimen/base_margin"
-    tools:context=".ui.fragments.CreateFragment">
+    android:background="@color/black">
+
 
     <EditText
-        android:id="@+id/et_author"
+        android:id="@+id/et_update_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/base_margin"
@@ -26,7 +26,7 @@
 
 
     <EditText
-        android:id="@+id/et_content"
+        android:id="@+id/et_update_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/base_margin"
@@ -38,10 +38,10 @@
         android:layout_marginTop="@dimen/base_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_author"/>
+        app:layout_constraintTop_toBottomOf="@id/et_update_author"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/done_button"
+        android:id="@+id/update_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/done_icon"
@@ -49,5 +49,8 @@
         android:layout_marginEnd="@dimen/side_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

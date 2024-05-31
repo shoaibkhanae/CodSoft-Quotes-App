@@ -34,6 +34,7 @@ class CreateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.doneButton.setOnClickListener { createQuotes() }
     }
 
@@ -43,6 +44,7 @@ class CreateFragment : Fragment() {
 
         val write = Write(content = content, author = author)
         shareViewModel.insert(write)
+
         Toast.makeText(requireContext(),"Quotes Created",Toast.LENGTH_SHORT).show()
         goToIdeasScreen()
     }

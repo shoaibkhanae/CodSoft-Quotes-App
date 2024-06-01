@@ -91,6 +91,7 @@
                     android:id="@+id/copy_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> quoteFragment.copyQuote()}"
                     android:src="@drawable/copy_icon"
                     app:tint="@color/white"
                     android:padding="@dimen/side_margin" />
@@ -99,6 +100,7 @@
                     android:id="@+id/save_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> quoteFragment.saveQuote()}"
                     android:layout_marginStart="@dimen/margin_icon"
                     android:src="@drawable/save_icon"
                     app:tint="@color/white"
@@ -108,6 +110,7 @@
                     android:id="@+id/share_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> quoteFragment.shareQuote()}"
                     android:layout_marginStart="@dimen/margin_icon"
                     android:src="@drawable/share_icon"
                     app:tint="@color/white"

@@ -53,29 +53,22 @@ class QuoteFragment : Fragment() {
         binding.apply {
             quoteFragment = this@QuoteFragment
         }
-
-        binding.copyButton.setOnClickListener { copyQuote() }
-
-        binding.saveButton.setOnClickListener { saveQuote() }
-
-        binding.shareButton.setOnClickListener { shareQuote() }
-
     }
 
-    private fun copyQuote() {
+     fun copyQuote() {
         val clipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Quote",content + author)
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(requireContext(),"copied",Toast.LENGTH_SHORT).show()
     }
 
-    private fun saveQuote() {
+    fun saveQuote() {
         val quote = Quote(content = content, author = author)
         shareViewModel.insert(quote)
         Toast.makeText(requireContext(),"Saved Successfully",Toast.LENGTH_SHORT).show()
     }
 
-    private fun shareQuote() {
+    fun shareQuote() {
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT,"$content\n$author")

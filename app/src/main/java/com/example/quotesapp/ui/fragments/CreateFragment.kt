@@ -35,10 +35,10 @@ class CreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.doneButton.setOnClickListener { createQuotes() }
+        binding.createFragment = this@CreateFragment
     }
 
-    private fun createQuotes() {
+    fun createQuotes() {
         val content = binding.etContent.text.toString()
         val author = binding.etAuthor.text.toString()
 

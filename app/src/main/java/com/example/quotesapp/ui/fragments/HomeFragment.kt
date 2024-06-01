@@ -44,7 +44,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         handleActionBar()
         setupUI()
-        binding?.createButton?.setOnClickListener { goToCreateScreen() }
+        binding?.apply {
+            homeFragment = this@HomeFragment
+        }
     }
 
 
@@ -60,13 +62,17 @@ class HomeFragment : Fragment() {
             footer = LoaderAdapter{ adapter.retry() }
         )
 
-        adapter.addLoadStateListener { loadState ->
-            binding?.progressCircularBar?.isVisible = loadState.refresh is LoadState.Loading
-            binding?.btnRetry?.isVisible = loadState.refresh is LoadState.Error
+        binding?.btnRetry?.setOnClickListener { adapter.retry() }
 
-            val errorState = loadState.append as? LoadState.Error
-                ?: loadState.prepend as? LoadState.Error
-                ?: loadState.refresh as? LoadState.Error
+        adapter.addLoadStateListener { loadState ->
+
+            binding?.apply {
+                progressCircularBar.isVisible = loadState.source.refresh is LoadState.Loading
+                btnRetry.isVisible = loadState.source.refresh is LoadState.Error
+                btnRetry.isVisible = loadState.mediator?.refresh is LoadState.Error
+            }
+
+            val errorState = loadState.source.refresh as? LoadState.Error
             errorState?.let { Toast.makeText(requireContext(),"${it.error}", Toast.LENGTH_LONG).show() }
         }
 
@@ -103,7 +109,7 @@ class HomeFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun goToCreateScreen() {
+    fun goToCreateScreen() {
         findNavController().navigate(R.id.action_homeFragment_to_createFragment)
     }
 

@@ -16,7 +16,7 @@ import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 
 class UpdateFragment : Fragment() {
     private var _binding: FragmentUpdateBinding? = null
-    val binding
+    private val binding
         get() = _binding!!
 
     private val shareViewModel: QuoteViewModel by activityViewModels()
@@ -38,26 +38,26 @@ class UpdateFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUpdateBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.etUpdateAuthor.setText(author)
-        binding.etUpdateContent.setText(content)
-
-        binding.updateButton.setOnClickListener { updateQuote() }
+        binding.apply {
+            etUpdateAuthor.setText(author)
+            etUpdateContent.setText(content)
+            updateFragment = this@UpdateFragment
+        }
     }
 
-    private fun updateQuote() {
+    fun updateQuote() {
         val author = binding.etUpdateAuthor.text.toString()
         val content = binding.etUpdateContent.text.toString()
 
-        val write = Write(id,author,content)
-        shareViewModel.insert(write)
+        val write = Write(id, content, author)
+        shareViewModel.update(write)
         goToIdeasScreen()
         Toast.makeText(requireContext(),"Quote Updated.",Toast.LENGTH_SHORT).show()
     }

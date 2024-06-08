@@ -6,26 +6,25 @@ It is Quotes App, I used Retrofit, Room, Coroutine, Paging 3, MVVM Architecture,
 
 # Build with 🔨
 * Kotlin
-* Coroutines
-* Live data
-* Flow
 * View Binding
-* Data Binding 
-* Clean Architecture + MVVM
-* Hilt DI
+* Data Binding
+* Material Components Library
+* Live data
 * Room
 * Retrofit
+* Coroutines
+* Flow
+* MVVM + Clean Architecture
+* Hilt DI
 * Paging 3
 * Remote Mediator
-* Material Components Library 
 
 
 # Features ⚙️
 * Get Random Quotes
 * Offline Support
 * Search Quotes
-* Write your own quotes
-* Remainder  
+* Write your own quotes 
 * copy Quotes 
 * Save Quotes
 * Share Quotes

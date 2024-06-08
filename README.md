@@ -9,6 +9,7 @@ It is Quotes App, I used Retrofit, Room, Coroutine, Paging 3, MVVM Architecture,
 * View Binding
 * Data Binding
 * Material Components Library
+* Single Activity Pattern
 * Live data
 * Room
 * Retrofit

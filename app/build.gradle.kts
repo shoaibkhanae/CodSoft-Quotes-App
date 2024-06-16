@@ -47,6 +47,7 @@ dependencies {
     val room_version = "2.6.1"
     val paging_version = "3.2.1"
     val hilt_version = "2.48"
+    val work_version = "2.9.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -79,6 +80,8 @@ dependencies {
     // Hilt DI
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    // Kotlin + coroutines
+    implementation("androidx.work:work-runtime-ktx:$work_version")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

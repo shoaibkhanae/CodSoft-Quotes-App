@@ -38,15 +38,34 @@ class CreateFragment : Fragment() {
         binding.createFragment = this@CreateFragment
     }
 
+
     fun createQuotes() {
-        val content = binding.etContent.text.toString()
-        val author = binding.etAuthor.text.toString()
+        if (binding.etContent.text.isEmpty()) {
+            setupError(true)
+        } else {
+            setupError(false)
 
-        val write = Write(content = content, author = author)
-        shareViewModel.insert(write)
+            val content = binding.etContent.text.toString()
+            val author = if (binding.etAuthor.text.isEmpty()) {
+                "Unknown"
+            } else {
+                binding.etAuthor.text.toString()
+            }
 
-        Toast.makeText(requireContext(),"Quotes Created",Toast.LENGTH_SHORT).show()
-        goToIdeasScreen()
+            val write = Write(content = content, author = author)
+            shareViewModel.insert(write)
+
+            Toast.makeText(requireContext(),"Quotes Created",Toast.LENGTH_SHORT).show()
+            goToIdeasScreen()
+        }
+    }
+
+    private fun setupError(error: Boolean) {
+        if (error) {
+            binding.etContent.error = "Content is empty"
+        } else {
+            binding.etContent.error = null
+        }
     }
 
     private fun goToIdeasScreen() {

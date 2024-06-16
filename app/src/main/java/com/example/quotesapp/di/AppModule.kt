@@ -3,9 +3,9 @@ package com.example.quotesapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.quotesapp.data.api.QuoteApiService
-import com.example.quotesapp.data.db.dao.QuoteDao
 import com.example.quotesapp.data.db.QuoteDatabase
 import com.example.quotesapp.data.db.dao.AuthorQuotesDao
+import com.example.quotesapp.data.db.dao.QuoteDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

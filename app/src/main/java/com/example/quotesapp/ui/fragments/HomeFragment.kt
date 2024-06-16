@@ -49,7 +49,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun setupUI() {
         val adapter = QuotePagingAdapter()
 
@@ -68,8 +67,6 @@ class HomeFragment : Fragment() {
 
             binding?.apply {
                 progressCircularBar.isVisible = loadState.source.refresh is LoadState.Loading
-                btnRetry.isVisible = loadState.source.refresh is LoadState.Error
-                btnRetry.isVisible = loadState.mediator?.refresh is LoadState.Error
             }
 
             val errorState = loadState.source.refresh as? LoadState.Error

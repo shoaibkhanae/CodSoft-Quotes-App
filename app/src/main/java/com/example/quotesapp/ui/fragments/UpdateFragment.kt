@@ -53,13 +53,28 @@ class UpdateFragment : Fragment() {
     }
 
     fun updateQuote() {
-        val author = binding.etUpdateAuthor.text.toString()
-        val content = binding.etUpdateContent.text.toString()
+        if (binding.etUpdateContent.text.isEmpty()) {
+            setupError(true)
+        } else {
+            setupError(false)
 
-        val write = Write(id, content, author)
-        shareViewModel.update(write)
-        goToIdeasScreen()
-        Toast.makeText(requireContext(),"Quote Updated.",Toast.LENGTH_SHORT).show()
+            val author = if (binding.etUpdateAuthor.text.isEmpty()) "Unknown" else binding.etUpdateAuthor.text.toString()
+            val content = binding.etUpdateContent.text.toString()
+
+            val write = Write(id, content, author)
+            shareViewModel.update(write)
+            goToIdeasScreen()
+            Toast.makeText(requireContext(),"Quote Updated.",Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun setupError(error: Boolean) {
+        if (error) {
+            binding.etUpdateContent.error = "Content should not be empty."
+        } else {
+            binding.etUpdateContent.error = null
+        }
     }
 
     private fun goToIdeasScreen() {

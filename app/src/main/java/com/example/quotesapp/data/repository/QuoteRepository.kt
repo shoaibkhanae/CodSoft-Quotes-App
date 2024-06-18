@@ -9,8 +9,8 @@ import androidx.paging.liveData
 import com.example.quotesapp.data.api.QuoteApiService
 import com.example.quotesapp.data.db.QuoteDatabase
 import com.example.quotesapp.data.model.QuoteList
-import com.example.quotesapp.data.model.entities.Quote
-import com.example.quotesapp.data.model.entities.Write
+import com.example.quotesapp.data.db.entities.Quote
+import com.example.quotesapp.data.db.entities.Write
 import com.example.quotesapp.data.paging.remotemediator.QuoteRemoteMediator
 import com.example.quotesapp.utils.Response
 import javax.inject.Inject

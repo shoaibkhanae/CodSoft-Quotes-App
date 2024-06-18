@@ -6,8 +6,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.quotesapp.data.model.QuoteList
-import com.example.quotesapp.data.model.entities.Quote
-import com.example.quotesapp.data.model.entities.Write
+import com.example.quotesapp.data.db.entities.Quote
+import com.example.quotesapp.data.db.entities.Write
 import com.example.quotesapp.data.repository.QuoteRepository
 import com.example.quotesapp.utils.Response
 import dagger.hilt.android.lifecycle.HiltViewModel

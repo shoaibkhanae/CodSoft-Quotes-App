@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quotesapp.R
-import com.example.quotesapp.data.model.entities.Write
+import com.example.quotesapp.data.db.entities.Write
 import com.example.quotesapp.databinding.FragmentCreateBinding
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 import dagger.hilt.android.AndroidEntryPoint

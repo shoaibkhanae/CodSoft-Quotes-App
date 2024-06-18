@@ -1,4 +1,4 @@
-package com.example.quotesapp.data.model.entities
+package com.example.quotesapp.data.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

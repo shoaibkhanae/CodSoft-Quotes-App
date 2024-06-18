@@ -64,12 +64,13 @@ class HomeFragment : Fragment() {
         binding?.btnRetry?.setOnClickListener { adapter.retry() }
 
         adapter.addLoadStateListener { loadState ->
-
             binding?.apply {
                 progressCircularBar.isVisible = loadState.source.refresh is LoadState.Loading
+                btnRetry.isVisible = loadState.mediator?.refresh is LoadState.Error
             }
 
-            val errorState = loadState.source.refresh as? LoadState.Error
+
+            val errorState = loadState.mediator?.refresh as? LoadState.Error
             errorState?.let { Toast.makeText(requireContext(),"${it.error}", Toast.LENGTH_LONG).show() }
         }
 

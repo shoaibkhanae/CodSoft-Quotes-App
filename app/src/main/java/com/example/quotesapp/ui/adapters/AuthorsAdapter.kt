@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotesapp.R
-import com.example.quotesapp.data.model.entities.Write
+import com.example.quotesapp.data.db.entities.Write
 
 class AuthorsAdapter: ListAdapter<Write,AuthorsAdapter.AuthorsViewHolder>(AuthorsDiffCallBack()) {
     class AuthorsViewHolder(view: View) : RecyclerView.ViewHolder(view) {

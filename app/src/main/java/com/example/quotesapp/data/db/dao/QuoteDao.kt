@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.quotesapp.data.model.entities.Quote
+import com.example.quotesapp.data.db.entities.Quote
 import kotlinx.coroutines.flow.Flow
 
 @Dao

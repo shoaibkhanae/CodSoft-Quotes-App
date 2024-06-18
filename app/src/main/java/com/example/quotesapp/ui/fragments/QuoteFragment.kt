@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.quotesapp.R
-import com.example.quotesapp.data.model.entities.Quote
+import com.example.quotesapp.data.db.entities.Quote
 import com.example.quotesapp.databinding.FragmentQuoteBinding
 import com.example.quotesapp.ui.viewmodels.QuoteViewModel
 import dagger.hilt.android.AndroidEntryPoint

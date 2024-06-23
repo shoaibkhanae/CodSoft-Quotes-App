@@ -1,6 +1,6 @@
 # Quotes ✨
 
-![Quotes App](https://github.com/shoaibkhanae/CodSoft-Quotes-App/assets/147998474/1bdfd1dd-c10a-45cb-97ac-e155430d1a43)
+![Untitled design (1)](https://github.com/shoaibkhanae/CodSoft-Quotes-App/assets/147998474/fa6523df-ec8e-42b7-8ac1-95f15dbe324f)
 It is Quotes App, I used Retrofit, Room, Coroutine, Paging 3, MVVM Architecture, Material 3, Live data and navigation Components.
 
 
